@@ -16,98 +16,87 @@
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 
-    <style> 
-    
-    *{
-        font-size: 15px;
-        
-    }
-    
-    
+    <style>
+        * {
+            font-size: 15px;
+
+        }
     </style>
 
 <body>
 
 
-  <!--
-
-    Botões:
-     <div class="btn-group d-flex justify-content-center" role="group" style="padding: 8px;" aria-label="Basic mixed styles example">
-                <button type="button" class="btn btn-success">Inserir</button>
-                <button type="button" class="btn btn-warning">Editar</button>
-              <button type="button" class="btn btn-danger">Excluir</button>
-            </div>
-
-  -->
+  <div class="btn-group d-flex justify-content-center" role="group" style="padding: 8px;" aria-label="Basic mixed styles example">
+    <a href="/" class="btn btn-primary">Voltar à página principal</a>
+</div>
 
     <div class="row d-flex">
-      <div class="col-6">
-        <h4 style="padding: 18px;">Receitas</h4>
-        
-    
-        <table class="table table-hover">
-            <thead>
+        <div class="col-6">
+            <h4 style="padding: 18px;">Receitas</h4>
 
-              
-                <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Presente</th>
-                        <th scope="col">Prêmio</th>
-                        <th scope="col">Salário</th>
-                        <th scope="col">Outros</th>
+
+            <table class="table table-hover">
+                <thead>
+
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Categoria</th>
                     </tr>
                 </thead>
                 <tbody>
+
+                    {% for receita in receitas %}
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>ALgo</td>
+                        <th scope="row">{{ receita.id}}</th>
+                        <td>{{ receita.descricao }}</td>
+                        <td>R$ {{ receita.valor }}</td>
+                        <td>{{ receita.data }}</td>
+                        <td>{{ receita.categoria }}</td>
+
+
                     </tr>
-                    
+
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
         <div class="col-6">
             <h4 style="padding: 18px;">Despesas</h4>
-           
+
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Casa</th>
-                        <th scope="col">Educação</th>
-                        <th scope="col">Eletrônicos</th>
-                        <th scope="col">Lazer</th>
-                        <th scope="col">Saúde</th>
-                        <th scope="col">Supermercado</th>
-                        <th scope="col">Transporte</th>
-                        <th scope="col">Outros</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Categoria</th>
                     </tr>
                 </thead>
                 <tbody>
+
+                    {% for despesa in despesas %}
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                        <th scope="row">{{ despesa.id }}</th>
+                        <td>{{ despesa.descricao }}</td>
+                        <td>{{ despesa.valor }}</td>
+                        <td>{{ despesa.data }}</td>
+                        <td>{{ despesa.categoria }}</td>
                     </tr>
 
+                    {% endfor %}
                 </tbody>
-                
-            </table>    
+
+            </table>
         </div>
     </div>
-        
-          </div>
-        </div>
-      </div>
+
+    </div>
+    </div>
+    </div>
 
 
     <script src="{% static 'js/script.js' %}"></script>

@@ -25,24 +25,13 @@
     
     
     </style>
-
+</head>
 <body>
-
-  <!DOCTYPE html>
-  <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastro de Finança</title>
-  
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  </head>
-  <body>
     <div class="container">
       <h1 class="mt-4 mb-4">Cadastro de Finanças</h1>
   
-      <form>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="form-group">
           <label for="tipo">Tipo de Finança</label>
           <select class="form-control" id="tipo" name="tipo">
@@ -97,7 +86,9 @@
           <input type="file" class="form-control-file" id="comprovante" name="comprovante">
         </div>
   
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <button type="submit" class="btn btn-success">Cadastrar</button>
+        <a href="/" class="btn btn-primary">Voltar à página principal</a>
+
   
 
 
