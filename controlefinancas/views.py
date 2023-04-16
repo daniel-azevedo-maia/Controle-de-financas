@@ -33,7 +33,7 @@ def cadastrar(request):
             data=data,
             comprovante=comprovante
         )
-            receita.save()
+            despesa.save()
 
         # Redirecionar para a página de listar
         return redirect('listar')
@@ -42,8 +42,23 @@ def cadastrar(request):
 
 def listar(request):
     receitas = Receita.objects.all()
+    despesas = Despesa.objects.all()
 
-    return render(request, 'listar.html', {"receitas" : receitas})
+    receita_total = despesa_total = 0
+    for r in range(0, receitas.count()):
+        receita_total += receitas[r].valor
+
+    for d in range(0, despesas.count()):
+        despesa_total += despesas[d].valor
+    
+    saldo = receita_total - despesa_total
+
+    return render(request, 'listar.html', 
+                  {"receitas" : receitas, 
+                   "despesas" : despesas, 
+                   "receita_total" : receita_total,
+                   "despesa_total" : despesa_total,
+                   "saldo" : saldo})
 
 def editar(request):
     return render(request, 'editar.html')

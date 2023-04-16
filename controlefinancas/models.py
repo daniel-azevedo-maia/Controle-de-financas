@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Receita(models.Model):
-    id = models.AutoField(primary_key=True, default=1)
+    id = models.AutoField(primary_key=True)
     CATEGORIAS = (
         ('ESCOLHA', 'Escolha uma categoria'),
         ('PRS', 'Presente'),
@@ -23,7 +23,7 @@ class Receita(models.Model):
         verbose_name_plural = "Receitas"
 
 class Despesa(models.Model):
-    id = models.AutoField(primary_key=True, default=1)
+    id = models.AutoField(primary_key=True)
     
     CATEGORIAS = (
         ('ESCOLHA', 'Escolha uma categoria'),
