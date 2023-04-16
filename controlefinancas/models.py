@@ -16,7 +16,7 @@ class Receita(models.Model):
     descricao = models.TextField()
     categoria = models.CharField(
         max_length=10, choices=CATEGORIAS, default='ESCOLHA', blank=False)
-    comprovante = models.FileField(blank=False)
+    comprovante = models.FileField(upload_to='comprovantes/', blank=False)
 
     class Meta:
         verbose_name = "Receita"
@@ -42,7 +42,7 @@ class Despesa(models.Model):
     descricao = models.TextField()
     categoria = models.CharField(
         max_length=10, choices=CATEGORIAS, default='ESCOLHA', blank=False)
-    comprovante = models.FileField(blank=False)
+    comprovante = models.FileField(upload_to='comprovantes/', blank=False)
 
     class Meta:
         ordering = ['-data']

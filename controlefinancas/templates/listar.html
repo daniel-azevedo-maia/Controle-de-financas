@@ -19,6 +19,20 @@
 </head>
 
 <body>
+  <div class="col-12">
+    <table class="table saldo-table">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center">Saldo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-center total">R$ {{ saldo }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <div class="container py-4">
     <div class="d-flex justify-content-center mb-4">
       <a href="/" class="btn btn-primary">Voltar à página principal</a>
@@ -34,8 +48,8 @@
                 <th scope="col">ID</th>
                 <th scope="col">Descrição</th>
                 <th scope="col">Valor</th>
-                <th scope="col">Data</th>
-                <th scope="col">Categoria</th>
+                <th scope="col" class="data-column">Data</th> 
+                <th scope="col" class="comprovante-column">Comprovante</th>
               </tr>
             </thead>
             <tbody>
@@ -45,7 +59,8 @@
                 <td>{{ receita.descricao }}</td>
                 <td>R$ {{ receita.valor }}</td>
                 <td>{{ receita.data }}</td>
-                <td>{{ receita.categoria }}</td>
+                <td><a href="{{ receita.comprovante.url }}" download="{{ receita.comprovante.name }}">Comprovante</a></td>
+
               </tr>
               {% endfor %}
             </tbody>
@@ -71,8 +86,8 @@
                 <th scope="col">ID</th>
                 <th scope="col">Descrição</th>
                 <th scope="col">Valor</th>
-                <th scope="col">Data</th>
-                <th scope="col">Categoria</th>
+                <th scope="col" class="data-column">Data</th> 
+                <th scope="col" class="comprovante-column">Comprovante</th>
               </tr>
             </thead>
             <tbody>
@@ -80,9 +95,10 @@
               <tr>
                 <th scope="row">{{ despesa.id }}</th>
                 <td>{{ despesa.descricao }}</td>
-                <td>{{ despesa.valor }}</td>
+                <td>R$ {{ despesa.valor }}</td>
                 <td>{{ despesa.data }}</td>
-                <td>{{ despesa.categoria }}</td>
+                <td><a href="{{ despesa.comprovante.url }}" download="{{ despesa.comprovante.name }}">Comprovante</a></td>
+
               </tr>
               {% endfor %}
             </tbody>
@@ -99,20 +115,7 @@
         </div>
       </div>
 
-      <div class="col-12">
-        <table class="table saldo-table">
-          <thead>
-            <tr>
-              <th scope="col" class="text-center">Saldo</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-center total">R$ {{ saldo }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+     
     
     </div>
   </div>
