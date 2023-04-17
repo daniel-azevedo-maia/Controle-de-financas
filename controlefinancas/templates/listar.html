@@ -75,7 +75,7 @@
             </tr>
           </thead>
           <tbody>
-
+            <h4 class="mb-3" style = "padding: 10px">Receitas</h4>
 
 
           {% for receita in receitas %}
@@ -191,11 +191,12 @@
             </tr>
           </thead>
           <tbody>
-
+            <h4 class="mb-3" style = "padding: 10px">Despesas</h4>
              
             
             {% for despesa in despesas %}
             <tr>
+              
               <th scope="row">{{ despesa.id }}</th>
               <td>{{ despesa.descricao }}</td>
               <td>R$ {{ despesa.valor }}</td>

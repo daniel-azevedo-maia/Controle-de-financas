@@ -16,10 +16,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['danielazevedomaia.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
+LOGIN_URL = 'login'
 
 
 # Application definition
@@ -131,4 +132,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-PYTHONANYWHERE_API_TOKEN = 'b088a93a7098703107bae1bd779c247d3cc8c9c7'

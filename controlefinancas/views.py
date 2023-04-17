@@ -1,18 +1,22 @@
 from django.shortcuts import render, redirect
 from .models import Receita, Despesa
 from django.core.files.storage import FileSystemStorage
-
+from decimal import Decimal
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
 def index(request):
     return render(request, 'index.html')
 
-
+@login_required
 def cadastrar(request):
     if request.method == 'POST':
 
         tipo = request.POST.get('tipo')
         descricao = request.POST.get('descricao')
         valor = request.POST.get('valor')
+        valor = Decimal(valor) if valor else None
         categoria = request.POST.get('categoria')
         data = request.POST.get('data')
         comprovante = request.FILES.get('comprovante')
@@ -21,6 +25,7 @@ def cadastrar(request):
 
         if tipo == 'receita':
             receita = Receita(
+                user=request.user,
                 descricao=descricao,
                 valor=valor,
                 categoria=categoria,
@@ -30,6 +35,7 @@ def cadastrar(request):
             receita.save()
         else:
             despesa = Despesa(
+                user=request.user,
                 descricao=descricao,
                 valor=valor,
                 categoria=categoria,
@@ -44,9 +50,10 @@ def cadastrar(request):
     return render(request, 'cadastrar.html')
 
 
+@login_required
 def listar(request):
-    receitas = Receita.objects.all()
-    despesas = Despesa.objects.all()
+    receitas = Receita.objects.filter(user=request.user)  # Filtra as receitas do usuário atual
+    despesas = Despesa.objects.filter(user=request.user)  # Filtra as despesas do usuário atual
 
     receita_total = despesa_total = 0
     for r in range(0, receitas.count()):
@@ -64,7 +71,7 @@ def listar(request):
                    "despesa_total": despesa_total,
                    "saldo": saldo})
 
-
+@login_required
 def excluir(request, id, tipo):
 
     if tipo == 'receita':
@@ -78,7 +85,7 @@ def excluir(request, id, tipo):
 
     return redirect('listar')
 
-
+@login_required
 def atualizar(request):
 
 
@@ -117,3 +124,14 @@ def atualizar(request):
         despesa.save()
 
     return redirect('listar')
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})

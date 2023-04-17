@@ -1,0 +1,9 @@
+{% load static %}
+
+<h2>Registre-se</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Registrar</button>
+  </form>
+
