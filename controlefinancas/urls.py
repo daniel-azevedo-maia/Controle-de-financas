@@ -1,10 +1,10 @@
-from .views import index, cadastrar, listar, editar, excluir
+from .views import index, cadastrar, listar, excluir, atualizar
 from django.urls import path
 
 urlpatterns = [
     path('', index),
     path('cadastrar', cadastrar, name='cadastrar'),
+    path('atualizar', atualizar, name='atualizar'),
     path('listar', listar, name='listar'),
-    path('editar', editar, name='editar'),
-    path('excluir', excluir, name='excluir')
+    path('<str:tipo>/excluir/<int:id>', excluir, name='excluir')
 ]
