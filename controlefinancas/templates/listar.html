@@ -20,6 +20,40 @@
 
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+  <style>
+
+      
+    .btn-personalizado {
+      width: 150px;
+      margin: 0 auto;
+    }
+
+    body {
+      background-image: linear-gradient(to right, #1e3c72, #2a5298, #3292d0);
+      color: white;
+    }
+
+    .card {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: none;
+    }
+    
+    .card-title {
+      color: white;
+    }
+    
+    .card a {
+      text-decoration: none;
+      color: white;
+    }
+
+    * {
+      color: white;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -41,7 +75,12 @@
             </tr>
           </thead>
           <tbody>
-            {% for receita in receitas %}
+
+
+
+          {% for receita in receitas %}
+        
+         
             <tr>
               <th scope="row">{{ receita.id}}</th>
               <td>{{ receita.descricao }}</td>
@@ -133,19 +172,28 @@
             {% endfor %}
           </tbody>
         </table>
+        {% if not receitas %}
+          <a href="{% url 'cadastrar' %}" class="btn btn-success">Cadastrar nova receita</a>
+        {% endif %}   
       </div>
       <div class="col-md-6">
         <table class="table table-hover">
           <thead>
+            
             <tr>
+              
               <th scope="col">ID</th>
               <th scope="col">Descrição</th>
               <th scope="col">Valor</th>
               <th scope="col" class="data-column">Data</th>
               <th scope="col" class="comprovante-column">Comprovante</th>
+
             </tr>
           </thead>
           <tbody>
+
+             
+            
             {% for despesa in despesas %}
             <tr>
               <th scope="row">{{ despesa.id }}</th>
@@ -241,7 +289,13 @@
           </tr>
             {% endfor %}
           </tbody>
+          
         </table>
+        
+        {% if not despesas %}
+          <a href="{% url 'cadastrar' %}" class="btn btn-success">Cadastrar nova despesa</a>
+        {% endif %}   
+      
 
       </div>
 
@@ -268,7 +322,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><a href="/" class="btn btn-primary">Voltar</a></td>
+        <td><a href="/" class="btn btn-primary" >Voltar</a></td>
       </tr>
     </tfoot>
   </table>
