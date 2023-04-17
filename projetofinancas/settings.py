@@ -129,3 +129,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+PYTHONANYWHERE_API_TOKEN = 'b088a93a7098703107bae1bd779c247d3cc8c9c7'
