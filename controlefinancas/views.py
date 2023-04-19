@@ -5,6 +5,12 @@ from decimal import Decimal
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.http import HttpResponse
+from openpyxl import Workbook
+from openpyxl.utils.dataframe import dataframe_to_rows
+
+import pandas as pd
+import numpy as np
 
 def index(request):
     return render(request, 'index.html')
@@ -135,3 +141,45 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
+
+def exportarExcel(request):
+    receitas = Receita.objects.all()
+
+    dadosReceita = {
+        'ID': [receita.id for receita in receitas],
+        'DESCRIÇÃO': [receita.descricao for receita in receitas],
+        'VALOR': [receita.valor for receita in receitas]
+    }
+
+
+    despesas = Despesa.objects.all()
+
+    dadosDespesa = {
+        'ID': [despesa.id for despesa in despesas],
+        'DESCRIÇÃO': [despesa.descricao for despesa in despesas],
+        'VALOR': [despesa.valor for despesa in despesas]
+    }
+
+    df_receitas = pd.DataFrame(dadosReceita)
+    df_despesas = pd.DataFrame(dadosDespesa)
+
+     # Criar um novo arquivo Excel usando 'openpyxl'
+    file_name = 'registros_receitas_despesas.xlsx'
+    wb = Workbook()
+
+    # Escrever os dados do DataFrame de receitas na primeira planilha
+    ws_receitas = wb.active
+    ws_receitas.title = "Receitas"
+    for r in dataframe_to_rows(df_receitas, index=False, header=True):
+        ws_receitas.append(r)
+
+    ws_despesas = wb.create_sheet("Despesas")
+    for r in dataframe_to_rows(df_despesas, index=False, header=True):
+        ws_despesas.append(r)
+
+    wb.save(file_name)
+
+    with open(file_name, 'rb') as excel_file:
+        response = HttpResponse(excel_file, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = f'attachment; filename={file_name}'
+        return response

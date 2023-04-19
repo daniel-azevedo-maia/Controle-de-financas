@@ -82,6 +82,8 @@
               <th scope="col">Valor</th>
               <th scope="col" class="data-column">Data</th>
               <th scope="col" class="comprovante-column">Comprovante</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -179,11 +181,16 @@
               <td><a href="{% url 'excluir' tipo='receita' id=receita.id  %}" class="btn btn-danger">Excluir</a></td>
 
             </tr>
+            
             {% endfor %}
           </tbody>
         </table>
+       
+        
+
         {% if not receitas %}
           <a href="{% url 'cadastrar' %}" class="btn btn-success">Cadastrar nova receita</a>
+          
         {% endif %}   
       </div>
       <div class="col-md-6">
@@ -197,6 +204,8 @@
               <th scope="col">Valor</th>
               <th scope="col" class="data-column">Data</th>
               <th scope="col" class="comprovante-column">Comprovante</th>
+              <th></th>
+              <th></th>
 
             </tr>
           </thead>
@@ -320,12 +329,12 @@
       <tr>
         <td class="text-end"><strong>Receita total:</strong></td>
         <td class="text-left"> <strong> R$ {{ receita_total }}</strong></td>
-        <td></td>
       </tr>
       <tr>
         <td class="text-end"><strong>Despesa total:</td>
         <td class="text-left"><strong>R$ {{ despesa_total }}</strong></td>
         <td></td>
+        
       </tr>
       <tr>
         <td class="text-end"><strong>Total:</td>
@@ -333,7 +342,9 @@
         <td></td>
       </tr>
       <tr>
+        <td><a href="{% url 'exportarExcel' %}" class="btn btn-dark">Exportar para Excel</a></td>
         <td><a href="/" class="btn btn-primary" >Voltar</a></td>
+        
       </tr>
     </tfoot>
   </table>
